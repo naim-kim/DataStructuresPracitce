@@ -1,5 +1,6 @@
-#ifndef __CONTACT_H__
-#define __CONTACT_H__
+//22000056 김나임
+#ifndef CONTACT_H
+#define CONTACT_H
 #include <string>
 
 using namespace std;
@@ -10,12 +11,12 @@ typedef struct {
     int day;
 } Date;
 
-typedef struct {
-	char name[64];
-    Date dob; 
-    char email[64];
-    char phone[14];
-} Person;
+struct Person {
+    string name;
+    Date dob;
+    string email;
+    string phone;
+};
 
 class Contact {
   private:
@@ -36,6 +37,7 @@ class Contact {
     
     void load(string);
     void print();
+    Person str2person(string line);
 };
 
 #endif
