@@ -1,3 +1,5 @@
+//22000056 김나임
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -1,7 +1,7 @@
 //22000056 김나임
 #ifndef CONTACT_H
 #define CONTACT_H
-#include <string>
+#include <string> 
 
 using namespace std;
 
@@ -11,12 +11,13 @@ typedef struct {
     int day;
 } Date;
 
-struct Person {
-    string name;
-    Date dob;
-    string email;
-    string phone;
-};
+// expression must be a modifiable lvalue/.
+struct Person{
+	char name[64];
+    Date dob; 
+    char email[64];
+    char phone[14];
+}
 
 class Contact {
   private:
