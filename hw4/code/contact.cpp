@@ -10,7 +10,8 @@
 
 #include <iostream>
 #include <sstream>
-#include <cstring>
+#include <cstring> // strlen
+#include <cctype> // isspace
 
 using namespace std;
 
@@ -48,6 +49,9 @@ Person Contact::str2person(string line) {
 
     while (getline(ss, token, ';')) {
 
+        char* trimmed = this->trim(const_cast<char*>(token.c_str()));
+        token = trimmed;
+
         switch (i) {
         case 0:
             p.name = token;
@@ -58,6 +62,7 @@ Person Contact::str2person(string line) {
             p.dob.year = stoi(dateStr.substr(0, 4));
             p.dob.month = stoi(dateStr.substr(4, 2));
             p.dob.day = stoi(dateStr.substr(6, 2));
+
             break;
         }
 
@@ -72,4 +77,14 @@ Person Contact::str2person(string line) {
         i++;
     }
     return p;
+}
+
+char* Contact::trim(char* s) {
+    char* ptr;
+    if (!s) return nullptr;
+    while (isspace(*s)) s++;
+    for (ptr = s + std::strlen(s) - 1; (ptr >= s) && std::isspace(*ptr); --ptr)
+        ;
+    *(ptr + 1) = '\0';
+    return s;
 }

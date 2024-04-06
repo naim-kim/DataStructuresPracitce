@@ -1,7 +1,7 @@
 henry choi; 20190303; hchoi@handong.edu; 010-1234-5678
 handong kim; 20190302; hdkim@handong.edu; 010-1234-5679
 a kim; 20190302; hdkim@handong.edu; 010-1234-5679
-b kim; 2019765; as@handong.edu; 010-1234-3762
-d kim; 2019034t6; 3grfw@handong.edu; 010-1234-5835
-r kim; 206302; 7kijthgbv@handong.edu; 010-1234-9579
-t kim; 201946456; hdwf@handong.edu; 010-1234-1233
+b kim; 20190302; as@handong.edu; 010-1234-3762
+d kim; 20190302; 3grfw@handong.edu; 010-1234-5835
+r kim; 20190302; 7kijthgbv@handong.edu; 010-1234-9579
+t kim; 272020190302302; hdwf@handong.edu; 010-1234-1233
