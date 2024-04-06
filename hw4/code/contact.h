@@ -11,14 +11,14 @@ typedef struct {
     int day;
 } Date;
 
-// expression must be a modifiable lvalue/.
-struct Person{
-	char name[64];
-    Date dob; 
-    char email[64];
-    char phone[14];
-}
-
+// 'expression must be a modifiable lvalue' error fix
+struct Person {
+    string name;
+    Date dob;
+    string email;
+    string phone;
+};
+ 
 class Contact {
   private:
     Person* persons;
