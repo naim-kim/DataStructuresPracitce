@@ -38,5 +38,27 @@ void Contact::print() {
     }
 }
 
-// implement the other functions here 
+Person Contact::str2person(string line) {
+    stringstream ss(line);
+    string token;
+    int i = 0;
+    Person p;
+
+    while (getline(ss, token, ';')) {
+        switch (i) {
+            case 0: p.name = token; break;
+            case 1: {
+                string dateStr = token;
+                p.dob.year = stoi(dateStr.substr(0, 4));
+                p.dob.month = stoi(dateStr.substr(4, 2));
+                p.dob.day = stoi(dateStr.substr(6, 2));
+                break;
+            }
+            case 2: p.email = token; break;
+            case 3: p.phone = token; break;
+        }
+        i++;
+    }
+    return p;
+}
 
