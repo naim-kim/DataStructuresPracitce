@@ -21,7 +21,7 @@ void Contact::load(string file_name) {
 
     ifstream file(c_str);
     if (!file.is_open()) {
-        cerr << "Unable to open file." << endl;
+        cerr << "Unable to open file :(" << endl;
         return;
     }
     total_num = 0; // Reset total_num before loading contacts
@@ -47,10 +47,12 @@ Person Contact::str2person(string line) {
     Person p;
 
     while (getline(ss, token, ';')) {
+
         switch (i) {
         case 0:
             p.name = token;
             break;
+
         case 1: {
             string dateStr = token;
             p.dob.year = stoi(dateStr.substr(0, 4));
@@ -58,9 +60,11 @@ Person Contact::str2person(string line) {
             p.dob.day = stoi(dateStr.substr(6, 2));
             break;
         }
+
         case 2:
             p.email = token;
             break;
+            
         case 3:
             p.phone = token;
             break;
