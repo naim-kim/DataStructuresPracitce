@@ -13,6 +13,7 @@
 using namespace std;
 
 void Contact::load(string file_name) {
+
     char c_str[1024];
     strcpy(c_str, file_name.c_str());
 
@@ -21,8 +22,15 @@ void Contact::load(string file_name) {
         cerr << "Unable to open file." << endl;
         return;
     }
+     total_num = 0; // Reset total_num before loading contacts
 
+    string line;
+    while (getline(file, line)) {
+        persons[total_num++] = str2person(line);
+    }
+    file.close();
 }
+
 void Contact::print() {
     // implement here
 }
