@@ -1,0 +1,2 @@
+henry choi; 20190303; hchoi@handong.edu; 010-1234-5678
+handong kim; 20190302; hdkim@handong.edu; 010-1234-5679
