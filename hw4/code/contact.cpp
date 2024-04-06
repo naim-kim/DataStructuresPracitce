@@ -32,7 +32,10 @@ void Contact::load(string file_name) {
 }
 
 void Contact::print() {
-    // implement here
+
+    for (int i = 0; i < total_num; ++i) {
+        cout << "[" << persons[i].name << "][" << persons[i].dob.year << persons[i].dob.month << persons[i].dob.day << "][" << persons[i].email << "][" << persons[i].phone << "]" << endl;
+    }
 }
 
 // implement the other functions here 
