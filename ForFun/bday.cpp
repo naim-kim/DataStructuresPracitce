@@ -54,14 +54,11 @@ void sortBirthdays(vector<pair<string, string>>& namesAndBirthdays) {
 void printSortedBirthdays(const vector<pair<string, string>>& namesAndBirthdays) {
     cout << "Birthdays by Month:\n";
 
-    // Iterate through each month from January to December
+    // Iterate through each month
     for (int month = 1; month <= 12; ++month) {
-        // Print the month number
         cout << " [ " << month << "¿ù ]" << endl;
 
-        // Print birthdays of people in this month
         for (const auto& entry : namesAndBirthdays) {
-            // Extract month from the birthday string
             int birthdayMonth = stoi(entry.second.substr(5, 2));
 
             // If bday month == current month, print (day & name)
@@ -70,7 +67,7 @@ void printSortedBirthdays(const vector<pair<string, string>>& namesAndBirthdays)
             }
         }
 
-        cout << endl; // /n after each month
+        cout << endl;
     }
 }
 
@@ -80,28 +77,25 @@ void saveBirthdaysToFile(const vector<pair<string, string>>& namesAndBirthdays, 
     if (outputFile.is_open()) {
         outputFile << "Birthdays by Month:\n";
 
-        // Iterate through each month from January to December
         for (int month = 1; month <= 12; ++month) {
-            // Write the month number to the file
             outputFile << " [ " << month << "¿ù ]" << endl;
 
-            // Write birthdays of people in this month to the file
             for (const auto& entry : namesAndBirthdays) {
-                // Extract month from the birthday string
                 int birthdayMonth = stoi(entry.second.substr(5, 2));
 
-                // If birthday month == current month, write (day & name) to the file
                 if (birthdayMonth == month) {
                     outputFile << entry.second.substr(8) << " - " << entry.first << endl;
                 }
             }
 
-            outputFile << endl; // New line after each month
+            outputFile << endl;
         }
 
-        cout << "Birthdays data saved to " << filename << endl;
+        cout << "Data saved to " << filename << endl;
         outputFile.close();
+
     } else {
+
         cerr << "Unable to open file: " << filename << endl;
     }
 }
@@ -113,8 +107,11 @@ int main() {
 
     printSortedBirthdays(namesAndBirthdays);
 
-    // Save birthdays to a text file
-    saveBirthdaysToFile(namesAndBirthdays, "birthdays.txt");
+    string filename;
+    cout << "Enter filename to save data: ";
+    getline(cin, filename);
+
+    saveBirthdaysToFile(namesAndBirthdays, filename);
 
     return 0;
 }
