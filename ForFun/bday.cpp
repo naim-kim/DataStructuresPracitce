@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -33,8 +34,23 @@ vector<pair<string, string>> getNamesAndBirthdays() {
     return namesAndBirthdays;
 }
 
+// Function to sort birthdays (ignoring year)
+void sortBirthdays(vector<pair<string, string>>& namesAndBirthdays) {
+    // Custom comparator to compare only the month and day
+    auto compareDates = [](const pair<string, string>& a, const pair<string, string>& b) {
+        string birthdayA = a.second.substr(5); // Extracting month and day
+        string birthdayB = b.second.substr(5);
+        return birthdayA < birthdayB;
+    };
+
+    // Sorting based on birthdays (ignoring year)
+    sort(namesAndBirthdays.begin(), namesAndBirthdays.end(), compareDates);
+}
+
 int main() {
     vector<pair<string, string>> namesAndBirthdays = getNamesAndBirthdays();
+
+    sortBirthdays(namesAndBirthdays);
 
     // Code for the next steps will go here
 
