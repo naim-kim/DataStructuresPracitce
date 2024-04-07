@@ -47,12 +47,20 @@ void sortBirthdays(vector<pair<string, string>>& namesAndBirthdays) {
     sort(namesAndBirthdays.begin(), namesAndBirthdays.end(), compareDates);
 }
 
+// Function to print sorted birthdays from January to December
+void printSortedBirthdays(const vector<pair<string, string>>& namesAndBirthdays) {
+    cout << "Sorted Birthdays (January to December):\n";
+    for (const auto& entry : namesAndBirthdays) {
+        cout << entry.second << " - " << entry.first << endl;
+    }
+}
+
 int main() {
     vector<pair<string, string>> namesAndBirthdays = getNamesAndBirthdays();
 
     sortBirthdays(namesAndBirthdays);
 
-    // Code for the next steps will go here
+    printSortedBirthdays(namesAndBirthdays);
 
     return 0;
 }
