@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream> // File I/O
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -37,7 +38,7 @@ vector<pair<string, string>> getNamesAndBirthdays() {
     return namesAndBirthdays;
 }
 
-// Function to sort birthdays (ignoring year)
+// Function to sort birthdays (ignore year)
 void sortBirthdays(vector<pair<string, string>>& namesAndBirthdays) {
     // Custom comparator to compare only the month and day
     auto compareDates = [](const pair<string, string>& a, const pair<string, string>& b) {
@@ -56,7 +57,7 @@ void printSortedBirthdays(const vector<pair<string, string>>& namesAndBirthdays)
     // Iterate through each month from January to December
     for (int month = 1; month <= 12; ++month) {
         // Print the month number
-        cout << month << endl;
+        cout << " [ " << month << "¿ù ]" << endl;
 
         // Print birthdays of people in this month
         for (const auto& entry : namesAndBirthdays) {
@@ -73,12 +74,47 @@ void printSortedBirthdays(const vector<pair<string, string>>& namesAndBirthdays)
     }
 }
 
+void saveBirthdaysToFile(const vector<pair<string, string>>& namesAndBirthdays, const string& filename) {
+    ofstream outputFile(filename);
+
+    if (outputFile.is_open()) {
+        outputFile << "Birthdays by Month:\n";
+
+        // Iterate through each month from January to December
+        for (int month = 1; month <= 12; ++month) {
+            // Write the month number to the file
+            outputFile << " [ " << month << "¿ù ]" << endl;
+
+            // Write birthdays of people in this month to the file
+            for (const auto& entry : namesAndBirthdays) {
+                // Extract month from the birthday string
+                int birthdayMonth = stoi(entry.second.substr(5, 2));
+
+                // If birthday month == current month, write (day & name) to the file
+                if (birthdayMonth == month) {
+                    outputFile << entry.second.substr(8) << " - " << entry.first << endl;
+                }
+            }
+
+            outputFile << endl; // New line after each month
+        }
+
+        cout << "Birthdays data saved to " << filename << endl;
+        outputFile.close();
+    } else {
+        cerr << "Unable to open file: " << filename << endl;
+    }
+}
+
 int main() {
     vector<pair<string, string>> namesAndBirthdays = getNamesAndBirthdays();
 
     sortBirthdays(namesAndBirthdays);
 
     printSortedBirthdays(namesAndBirthdays);
+
+    // Save birthdays to a text file
+    saveBirthdaysToFile(namesAndBirthdays, "birthdays.txt");
 
     return 0;
 }
