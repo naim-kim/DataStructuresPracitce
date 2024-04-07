@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <cctype> // isspace
+#include <sstream> // istringstream
 
 using namespace std;
 
@@ -19,14 +21,15 @@ vector<pair<string, string>> getNamesAndBirthdays() {
         if (input == "done")
             break;
 
-        size_t pos = input.find('\t'); // Assuming the input is separated by a tab character
-        if (pos == string::npos) {
+        // split string
+        istringstream iss(input);
+        string name, birthday;
+        iss >> name >> birthday;
+
+        if (name.empty() || birthday.empty()) {
             cout << "Please enter in the format 'name yyyy-mm-dd' or 'done' to finish\n";
             continue;
         }
-
-        string name = input.substr(0, pos);
-        string birthday = input.substr(pos + 1);
 
         namesAndBirthdays.push_back(make_pair(name, birthday));
     }
@@ -58,15 +61,15 @@ void printSortedBirthdays(const vector<pair<string, string>>& namesAndBirthdays)
         // Print birthdays of people in this month
         for (const auto& entry : namesAndBirthdays) {
             // Extract month from the birthday string
-            int birthdayMonth = stoi(entry.second.substr(5, 2)); // Assuming the format is yyyy-mm-dd
+            int birthdayMonth = stoi(entry.second.substr(5, 2));
 
-            // If the birthday month matches the current month, print it
+            // If bday month == current month, print (day & name)
             if (birthdayMonth == month) {
-                cout << entry.second.substr(8) << " - " << entry.first << endl; // Print day and name
+                cout << entry.second.substr(8) << " - " << entry.first << endl;
             }
         }
 
-        cout << endl; // Add a new line after each month's birthdays
+        cout << endl; // /n after each month
     }
 }
 
