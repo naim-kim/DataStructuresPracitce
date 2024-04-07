@@ -10,7 +10,7 @@ vector<pair<string, string>> getNamesAndBirthdays() {
     vector<pair<string, string>> namesAndBirthdays;
     string input;
 
-    cout << "Enter names and birthdays in the format 'name yyyy-mm-dd'. Enter 'done' to finish:\n";
+    cout << "Enter the list of names and birthdays 'name yyyy-mm-dd'. Enter 'done' to finish:\n";
 
     while (true) {
         cout << "> ";
@@ -21,7 +21,7 @@ vector<pair<string, string>> getNamesAndBirthdays() {
 
         size_t pos = input.find('\t'); // Assuming the input is separated by a tab character
         if (pos == string::npos) {
-            cout << "Invalid input format. Please enter in the format 'name yyyy-mm-dd'.\n";
+            cout << "Please enter in the format 'name yyyy-mm-dd' or 'done' to finish\n";
             continue;
         }
 
@@ -47,11 +47,26 @@ void sortBirthdays(vector<pair<string, string>>& namesAndBirthdays) {
     sort(namesAndBirthdays.begin(), namesAndBirthdays.end(), compareDates);
 }
 
-// Function to print sorted birthdays from January to December
 void printSortedBirthdays(const vector<pair<string, string>>& namesAndBirthdays) {
-    cout << "Sorted Birthdays (January to December):\n";
-    for (const auto& entry : namesAndBirthdays) {
-        cout << entry.second << " - " << entry.first << endl;
+    cout << "Birthdays by Month:\n";
+
+    // Iterate through each month from January to December
+    for (int month = 1; month <= 12; ++month) {
+        // Print the month number
+        cout << month << endl;
+
+        // Print birthdays of people in this month
+        for (const auto& entry : namesAndBirthdays) {
+            // Extract month from the birthday string
+            int birthdayMonth = stoi(entry.second.substr(5, 2)); // Assuming the format is yyyy-mm-dd
+
+            // If the birthday month matches the current month, print it
+            if (birthdayMonth == month) {
+                cout << entry.second.substr(8) << " - " << entry.first << endl; // Print day and name
+            }
+        }
+
+        cout << endl; // Add a new line after each month's birthdays
     }
 }
 
