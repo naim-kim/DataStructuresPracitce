@@ -1,3 +1,4 @@
+// Data Structures-02   22000056 김나임
 #include <iostream>
 #include <stack>
 #include <string>
@@ -17,7 +18,7 @@ public:
     void PlayCurrentSong() {
         if (!playlist.empty()) {
             cout << "Now playing: " << playlist.top() << endl;
-            cout << " ~ playing ~" << endl;
+            cout << "  >> playing" << endl;
             playlist.pop();
         } else {
             cout << "No more songs to play :(" << endl;
