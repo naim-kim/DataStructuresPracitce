@@ -1,60 +1,56 @@
 #include <iostream>
-#include <vector>
+#include <stack>
+#include <string>
+using namespace std;
 
-template <typename T>
-class Stack {
+class MusicPlaylist {
 private:
-    std::vector<T> elements;
+    stack<string> playlist;
 
 public:
-    void Push(const T& element) {
-        elements.push_back(element);
+    void AddSong(const string& song) {
+        playlist.push(song);
     }
 
-    void Pop() {
-        if (!IsEmpty()) {
-            elements.pop_back();
+    void PlayCurrentSong() {
+        if (!playlist.empty()) {
+            cout << "Now playing: " << playlist.top() << endl;
+            playlist.pop();
         } else {
-            std::cerr << "Error: Stack is empty. Cannot pop.\n";
+            cout << "Playlist is empty" << endl;
         }
     }
 
-    const T& Top() const {
-        if (!IsEmpty()) {
-            return elements.back();
+    // Print current playlist
+    void PrintPlaylist() const {
+        if (!playlist.empty()) {
+            cout << "Current Playlist:" << endl;
+            stack<string> temp = playlist;
+            while (!temp.empty()) {
+                cout << temp.top() << endl;
+                temp.pop();
+            }
         } else {
-            std::cerr << "Error: Stack is empty. Cannot get top element.\n";
-            // Returning a default value if stack is empty.
-            static T default_value;
-            return default_value;
+            cout << "Playlist is empty" << endl;
         }
-    }
-
-    bool IsEmpty() const {
-        return elements.empty();
-    }
-
-    void Print() const {
-        std::cout << "Stack elements: ";
-        for (const auto& element : elements) {
-            std::cout << element << " ";
-        }
-        std::cout << std::endl;
     }
 };
 
 int main() {
-    Stack<int> stack;
-    stack.Push(1);
-    stack.Push(2);
-    stack.Push(3);
-    stack.Push(4);
-    stack.Print(); // Should print: Stack elements: 1 2 3 4
+    MusicPlaylist playlist;
+    
+    // Add songs to the playlist
+    playlist.AddSong("Snooze - SZA");
+    playlist.AddSong("Chi-Ka - Tabber");
+    playlist.AddSong("Mala Fama - Danna Paola");
 
-    stack.Pop();
-    stack.Print(); // Should print: Stack elements: 1 2 3
-
-    std::cout << "Top element: " << stack.Top() << std::endl; // Should print: Top element: 3
+    // Play the songs
+    cout << "--- Playing Playlist ---" << endl;
+    playlist.PrintPlaylist();
+    playlist.PlayCurrentSong();
+    playlist.PlayCurrentSong();
+    playlist.PlayCurrentSong();
+    playlist.PlayCurrentSong(); // Try to play when playlist is empty
 
     return 0;
 }
