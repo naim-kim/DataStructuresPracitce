@@ -1,5 +1,3 @@
-// Data Structures-02   22000056 김나임
-
 #include <stdio.h>
 
 int main() {
@@ -17,7 +15,10 @@ int main() {
         return 1;
     }
 
-    while (fscanf(file, "%d", &number) == 1) {
+    printf("Numbers in %s: \n", filename);
+
+    while (fscanf(file, " %d", &number) == 1) {
+        printf("%d\n", number);
         if (number < smallest) {
             smallest = number;
         }
