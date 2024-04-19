@@ -1,4 +1,5 @@
 #include <string>
+#include <cstring> // Include cstring for strtok function
 #include "calc.h"
 #include "stack.h"
 
@@ -8,7 +9,10 @@ float Calculator::evaluate() {
     float operand1, operand2;
     float val = 0;
 
-    token = strtok(postfix, " ");
+    // Convert the postfix string to a C-style string
+    char* postfix_cstr = const_cast<char*>(postfix.c_str());
+
+    token = strtok(postfix_cstr, " ");
     while(token){
         if (isdigit(*token)) {
             stack.push(atof(token)); // Convert string to float and push to stack
