@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "calc.h"
+#include "postfix_calc.h"
 
 int main() {
     int choice = 0;
@@ -23,13 +23,14 @@ int main() {
 
             Calculator calc(str);
 
-            std::cout << "Result = " << calc.evaluate() << std::endl;
+            std::cout << ">> " + str + " = " << calc.evaluate() << "\n" << std::endl;
+
         } 
-        /*else if (choice == 2) {
-            std::cout << "Regular Calculator not implemented yet" << std::endl;
-        } */
+        else if (choice == 2) {
+            std::cout << "I am so sorry, Regular Calculator not implemented yet\n" << std::endl;
+        }
         else if (choice == 3) {
-            std::cout << "Exiting the program..." << std::endl;
+            std::cout << "See you next time! :)" << std::endl;
         } else {
             std::cout << "Invalid choice. Please try again." << std::endl;
         }

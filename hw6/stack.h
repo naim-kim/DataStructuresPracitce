@@ -12,16 +12,16 @@ using namespace std;
 // evaluation of postfix when T == float
 template <class T>
 class Stack { 
-	private: 
-		T stack[STACK_SIZE];
+    private: 
+        T stack[STACK_SIZE];
         int max_size;
-		int top;
-	public: 
-		Stack() { top = -1; max_size = STACK_SIZE;}
-		void push(T value) { stack[++top] = value; } // assuming 'not full'
-		T pop() { return stack[top--]; }   
-		int isEmpty() { return top == -1; }
-		T read_top() { return stack[top]; }  
+        int top;
+    public: 
+        Stack() { top = -1; max_size = STACK_SIZE;}
+        void push(T value) { stack[++top] = value; } // assuming 'not full'
+        T pop() { return stack[top--]; }   
+        int isEmpty() { return top == -1; }
+        T read_top() { return stack[top]; }  
 };
 
 #endif

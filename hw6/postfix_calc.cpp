@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <cctype>
-#include "calc.h"
+#include "postfix_calc.h"
 #include "stack.h"
 
 float Calculator::evaluate() {
@@ -13,8 +13,10 @@ float Calculator::evaluate() {
     // Convert the postfix string to a C-style string
     char* postfix_cstr = const_cast<char*>(postfix.c_str());
 
+    // Tokenize the postfix expression
     token = strtok(postfix_cstr, " ");
     while(token){
+        // Check if the token represents a number
         if (isdigit(*token) || (strlen(token) > 1 && *token == '-' && isdigit(token[1]))) {
             stack.push(atof(token)); // Convert string to float and push to stack
         }
@@ -56,9 +58,11 @@ float Calculator::evaluate() {
                     return 0;
             }
         }
+        // Get the next token
         token = strtok(NULL, " ");
     }
 
+    // Retrieve the final result from the stack
     if (!stack.isEmpty()) {
         val = stack.pop(); // Result is stored in the top of the stack
     } else {
@@ -66,6 +70,7 @@ float Calculator::evaluate() {
         return 0;
     }
 
+    // Check if there are multiple values left on the stack
     if (!stack.isEmpty()) {
         std::cout << "Error: Multiple values left on stack. The postfix expression is invalid." << std::endl;
         return 0;
