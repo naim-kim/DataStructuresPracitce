@@ -8,11 +8,11 @@
 using namespace std;
 
 class Calculator {
-	private:
-
-	public:
-		Calculator(string str) { };
-		float evaluate();
+    private:
+        string postfix;
+    public:
+        Calculator(string str) : postfix(str) {}
+        float evaluate();
 };
 
 #endif
