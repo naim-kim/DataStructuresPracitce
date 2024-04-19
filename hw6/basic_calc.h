@@ -6,7 +6,7 @@
 
 class BasicCalculator {
 private:
-    std::string expression;
+    std::string arithmetic_expr;
 
     // Private helper functions
     bool isOperator(char ch);
@@ -14,7 +14,7 @@ private:
     float calculate(float operand1, float operand2, char op);
 
 public:
-    BasicCalculator(std::string expr) : expression(expr) {}
+    BasicCalculator(std::string expr) : arithmetic_expr(expr) {}
     float evaluate();
 };
 

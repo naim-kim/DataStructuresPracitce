@@ -36,13 +36,13 @@ float BasicCalculator::evaluate() {
     Stack<float> operandStack;
     Stack<char> operatorStack;
 
-    for (size_t i = 0; i < expression.length(); ++i) {
-        char ch = expression[i];
+    for (size_t i = 0; i < arithmetic_expr.length(); ++i) {
+        char ch = arithmetic_expr[i];
         if (isdigit(ch) || ch == '.') {
             std::string numStr;
-            while (i < expression.length() && (isdigit(ch) || ch == '.')) {
+            while (i < arithmetic_expr.length() && (isdigit(ch) || ch == '.')) {
                 numStr += ch;
-                ch = expression[++i];
+                ch = arithmetic_expr[++i];
             }
             operandStack.push(std::stof(numStr));
             --i;

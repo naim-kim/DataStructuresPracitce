@@ -1,46 +1,58 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 #include "postfix_calc.h"
 #include "basic_calc.h"
 
 int main() {
-    int choice = 0;
+    while (true) {
+        int choice = 0;
+        std::string input;
 
-    while (choice != 3) {
-        std::cout << "Select Calculator Type:" << std::endl;
-        std::cout << "1. Postfix Calculator" << std::endl;
-        std::cout << "2. Regular Calculator" << std::endl;
-        std::cout << "3. Exit" << std::endl;
-        std::cout << "Enter your choice: ";
-        std::cin >> choice;
+        while (true) {
+            std::cout << "Select Calculator Type:" << std::endl;
+            std::cout << "1. Postfix Calculator" << std::endl;
+            std::cout << "2. Regular Calculator" << std::endl;
+            std::cout << "3. Exit" << std::endl;
+            std::cout << "What Calculator would you like to use? (or select 3 to exit) >> ";
+            std::getline(std::cin, input);
 
-        std::cin.ignore(); // Ignore newline character in buffer
+            // Check if input is a valid integer
+            std::stringstream ss(input);
+            if (ss >> choice && (choice == 1 || choice == 2 || choice == 3)) {
+                break; // Break out of the inner loop if input is valid
+            } else {
+                std::cout << "Invalid choice. Please select 1, 2, or 3." << std::endl;
+            }
+        }
+
+        // Convert the input to an integer
+        std::stringstream(input) >> choice;
+
+        if (choice == 3) {
+            std::cout << "See you next time! :)" << std::endl;
+            break; // Break out of the outer loop if choice is 3
+        }
 
         if (choice == 1) {
-            std::string str;
+            std::string postfix_expr;
 
-            std::cout << "Input postfix expression: ";
-            std::getline(std::cin, str);    // reading one line from keyboard
+            std::cout << "Enter a postfix expression (be sure to add ' ' spaces in between your characters): ";
+            std::getline(std::cin, postfix_expr);    // reading one line from keyboard
 
-            Calculator calc(str);
+            Calculator calc(postfix_expr);
 
-            std::cout << ">> " + str + " = " << calc.evaluate() << "\n" << std::endl;
+            std::cout << ">> " + postfix_expr + " = " << calc.evaluate() << "\n" << std::endl;
 
-        } 
-        else if (choice == 2) {
-            std::string expression;
+        } else if (choice == 2) {
+            std::string arithmetic_expr;
 
             std::cout << "Enter an arithmetic expression: ";
-            std::getline(std::cin, expression);    // reading one line from keyboard
+            std::getline(std::cin, arithmetic_expr);    // reading one line from keyboard
 
-            BasicCalculator basicCalc(expression);
+            BasicCalculator basicCalc(arithmetic_expr);
 
-            std::cout << "\t" + expression + " = " << basicCalc.evaluate() << "\n" << std::endl;
-        }
-        else if (choice == 3) {
-            std::cout << "See you next time! :)" << std::endl;
-        } else {
-            std::cout << "Invalid choice. Please try again." << std::endl;
+            std::cout << "\t" + arithmetic_expr + " = " << basicCalc.evaluate() << "\n" << std::endl;
         }
     }
 
