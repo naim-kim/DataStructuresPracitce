@@ -1,18 +1,45 @@
-// calc.h
-#ifndef __CALC_H__
-#define __CALC_H__
+#ifndef  __CALC_H__
+#define  __CALC_H__
 
 #include <iostream>
-#include <string>
-
-using namespace std;
+#include <ctype.h>  
+#include <stdlib.h> 
 
 class Calculator {
-private:
-    string expression;
-public:
-    Calculator(string str) : expression(str) {}
-    float evaluate();
+    private:
+        std::string postfix;
+    public:
+        Calculator(std::string str) : postfix(str) {}
+        float evaluate();
+};
+
+#endif
+
+// stack.h
+#ifndef  __STACK_H__
+#define  __STACK_H__
+
+#include <iostream>
+#include <ctype.h>  
+#include <stdlib.h> 
+using namespace std;
+
+#define STACK_SIZE 100
+
+// infix to postfix, when T == int
+// evaluation of postfix when T == float
+template <class T>
+class Stack { 
+    private: 
+        T stack[STACK_SIZE];
+        int max_size;
+        int top;
+    public: 
+        Stack() { top = -1; max_size = STACK_SIZE;}
+        void push(T value) { stack[++top] = value; } // assuming 'not full'
+        T pop() { return stack[top--]; }   
+        int isEmpty() { return top == -1; }
+        T read_top() { return stack[top]; }  
 };
 
 #endif

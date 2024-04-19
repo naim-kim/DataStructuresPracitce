@@ -1,25 +1,26 @@
-// calc.cpp
+#include <string>
+#include <cstring> // Include cstring for strtok function
 #include "calc.h"
 #include "stack.h"
 
 float Calculator::evaluate() {
     Stack<float> stack;
-    string token;
+    char* token;
     float operand1, operand2;
-    float result = 0;
+    float val = 0;
 
-    size_t pos = 0;
-    while ((pos = expression.find(" ")) != string::npos) {
-        token = expression.substr(0, pos);
-        expression.erase(0, pos + 1);
+    // Convert the postfix string to a C-style string
+    char* postfix_cstr = const_cast<char*>(postfix.c_str());
 
-        if (isdigit(token[0]) || (token[0] == '-' && isdigit(token[1]))) {
-            stack.push(stof(token)); // Convert string to float and push to stack
+    token = strtok(postfix_cstr, " ");
+    while(token){
+        if (isdigit(*token)) {
+            stack.push(atof(token)); // Convert string to float and push to stack
         }
         else { // token is an operator
             operand2 = stack.pop();
             operand1 = stack.pop();
-            switch (token[0]) {
+            switch(*token) {
                 case '+':
                     stack.push(operand1 + operand2);
                     break;
@@ -37,9 +38,9 @@ float Calculator::evaluate() {
                     return 0;
             }
         }
+        token = strtok(NULL, " ");
     }
+    val = stack.pop(); // Result is stored in the top of the stack
 
-    result = stack.pop(); // Result is stored in the top of the stack
-
-    return result;
+    return val;
 }

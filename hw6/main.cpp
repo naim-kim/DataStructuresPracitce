@@ -1,36 +1,38 @@
 #include <iostream>
 #include <string>
-#include "postfix_calc.h"
 #include "calc.h"
 
-using namespace std;
-
 int main() {
-    int choice;
-    cout << "Select Calculator Type:" << endl;
-    cout << "1. Postfix Calculator" << endl;
-    cout << "2. Regular Calculator" << endl;
-    cout << "Enter your choice: ";
-    cin >> choice;
 
-    cin.ignore(); // Ignore newline character in buffer
+    int choice;
+    std::cout << "Select Calculator Type:" << std::endl;
+    std::cout << "1. Postfix Calculator" << std::endl;
+    std::cout << "2. Regular Calculator" << std::endl;
+    std::cout << "Enter your choice: ";
+    std::cin >> choice;
+
+    std::cin.ignore(); // Ignore newline character in buffer
 
     if (choice == 1) {
-        string postfix_expr;
-        cout << "Input postfix expression: ";
-        getline(cin, postfix_expr);
+        std::string str;
 
-        PostfixCalculator postfix_calc(postfix_expr);
-        cout << "Result = " << postfix_calc.evaluate() << endl;
-    } else if (choice == 2) {
-        string expression;
-        cout << "Input expression: ";
-        getline(cin, expression);
+        std::cout << "Input postfix expression: ";
+        std::getline(std::cin, str);    // reading one line from keyboard
 
-        Calculator regular_calc(expression);
-        cout << "Result = " << regular_calc.evaluate() << endl;
-    } else {
-        cout << "Invalid choice." << endl;
+        Calculator calc(str);
+
+        std::cout << "Result = " << calc.evaluate() << std::endl;
+    } 
+    /*else if (choice == 2) {
+        //string expression;
+        std::cout << "Not made yet.. :( sorry)";
+        //getline(cin, expression);
+
+        //Calculator regular_calc(expression);
+        //cout << "Result = " << regular_calc.evaluate() << endl;
+    } */
+    else {
+        std::cout << "Invalid choice." << std::endl;
     }
 
     return 0;
