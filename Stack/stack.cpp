@@ -1,4 +1,3 @@
-// Data Structures-02   22000056 김나임
 #include <iostream>
 #include <stack>
 #include <string>

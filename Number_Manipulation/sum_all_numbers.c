@@ -1,5 +1,3 @@
-// Data Structures-02   22000056 김나임
-
 #include <stdio.h>
 #include <stdlib.h> // atof
 #include <string.h>

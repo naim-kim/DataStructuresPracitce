@@ -1,4 +1,4 @@
-# hw1a
+# find_smallest_number
 
 ## Description
 This C program is designed to find the smallest number in a file. It prompts the user to input a filename, reads the numbers from the specified file, and then identifies and outputs the smallest number found in the file.
@@ -17,7 +17,7 @@ The program will output the smallest number found in the specified file.
 ![alt text](image.png)
 
 
-# hw1b
+# sum_all_numbers
 
 ## Description
 This C program calculates the sum of all floating-point numbers found in a text file. It prompts the user to input a filename, reads the file, extracts the numbers (both integers and floating-point), calculates their sum, and finally outputs the result.

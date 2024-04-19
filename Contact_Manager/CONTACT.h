@@ -1,4 +1,3 @@
-// 22000056 김나임
 #ifndef CONTACT_H
 #define CONTACT_H
 
