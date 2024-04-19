@@ -1,5 +1,5 @@
 // calc.cpp
-#include "postfix_calc.h"
+#include "calc.h"
 #include "stack.h"
 
 float Calculator::evaluate() {

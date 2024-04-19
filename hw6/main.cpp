@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "postfix_calc.h"
+#include "calc.h"
 
 using namespace std;
 
