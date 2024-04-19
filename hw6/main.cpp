@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "postfix_calc.h"
+#include "basic_calc.h"
 
 int main() {
     int choice = 0;
@@ -27,7 +28,14 @@ int main() {
 
         } 
         else if (choice == 2) {
-            std::cout << "I am so sorry, Regular Calculator not implemented yet\n" << std::endl;
+            std::string expression;
+
+            std::cout << "Input infix expression: ";
+            std::getline(std::cin, expression);    // reading one line from keyboard
+
+            BasicCalculator basicCalc(expression);
+
+            std::cout << "\t" + expression + " = " << basicCalc.evaluate() << "\n" << std::endl;
         }
         else if (choice == 3) {
             std::cout << "See you next time! :)" << std::endl;
