@@ -1,14 +1,16 @@
-// calc.cpp
+// postfix_calc.cpp
 #include "postfix_calc.h"
 #include "stack.h"
+#include <cctype>
 
-float Calculator::evaluate() {
+float PostfixCalculator::evaluate() {
     Stack<float> stack;
     string token;
     float operand1, operand2;
     float result = 0;
 
     size_t pos = 0;
+    string expression = postfix_expr; // Copy postfix expression to local variable
     while ((pos = expression.find(" ")) != string::npos) {
         token = expression.substr(0, pos);
         expression.erase(0, pos + 1);
