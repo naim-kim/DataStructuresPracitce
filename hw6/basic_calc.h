@@ -3,19 +3,18 @@
 
 #include <iostream>
 #include <string>
-#include "postfix_calc.h"
 
 class BasicCalculator {
 private:
-    std::string infix;
+    std::string expression;
 
     // Private helper functions
     bool isOperator(char ch);
     int precedence(char op);
-    std::string infixToPostfix(std::string infixExpr);
+    float calculate(float operand1, float operand2, char op);
 
 public:
-    BasicCalculator(std::string expr) : infix(expr) {}
+    BasicCalculator(std::string expr) : expression(expr) {}
     float evaluate();
 };
 

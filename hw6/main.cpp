@@ -30,7 +30,7 @@ int main() {
         else if (choice == 2) {
             std::string expression;
 
-            std::cout << "Input infix expression: ";
+            std::cout << "Enter an arithmetic expression: ";
             std::getline(std::cin, expression);    // reading one line from keyboard
 
             BasicCalculator basicCalc(expression);
