@@ -1,14 +1,16 @@
+//DataStructures-02 22000056 Naim Kim
+
 #ifndef BASIC_CALC_H
 #define BASIC_CALC_H
 
 #include <iostream>
 #include <string>
 
-class BasicCalculator {
+class BasicCalculator
+{
 private:
     std::string arithmetic_expr;
 
-    // Private helper functions
     bool isOperator(char ch);
     int precedence(char op);
     float calculate(float operand1, float operand2, char op);
@@ -18,4 +20,4 @@ public:
     float evaluate();
 };
 
-#endif // BASIC_CALC_H
+#endif
