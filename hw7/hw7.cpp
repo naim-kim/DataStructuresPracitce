@@ -5,36 +5,46 @@
 
 using namespace std;
 
-class Node {
+class Node
+{
 public:
     string info;
-    Node* next;
+    Node *next;
 
     Node(string info) : info(info), next(nullptr) {}
 };
 
-class Stack {
+class Stack
+{
 private:
-    Node* head;
+    Node *head;
 
 public:
     Stack() : head(nullptr) {}
 
-    void push(string info) {
-        Node* newNode = new Node(info);
-        if (!head) {
+    void push(string info)
+    {
+        Node *newNode = new Node(info);
+        if (!head)
+        {
             head = newNode;
-        } else {
+        }
+        else
+        {
             newNode->next = head;
             head = newNode;
         }
     }
 
-    string pop() {
-        if (!head) {
+    string pop()
+    {
+        if (!head)
+        {
             return "";
-        } else {
-            Node* temp = head;
+        }
+        else
+        {
+            Node *temp = head;
             string info = temp->info;
             head = head->next;
             delete temp;
@@ -42,24 +52,34 @@ public:
         }
     }
 
-    ~Stack() {
-        while (head) {
-            Node* temp = head;
+    ~Stack()
+    {
+        while (head)
+        {
+            Node *temp = head;
             head = head->next;
             delete temp;
         }
     }
 };
 
-void output(const string& file_name) {
+void output(const string &file_name)
+{
     Stack stack;
     ifstream file(file_name);
-    if (!file.is_open()) {
+    if (!file.is_open())
+    {
         cerr << "Error opening " << file_name << endl;
         return;
     }
     string line;
-    while (getline(file, line)) {
+    while (getline(file, line))
+    {
+        // Skip empty lines
+        if (line.empty() || line.find_first_not_of(" \t\n\v\f\r") == string::npos)
+        { // findFirstNonWhitespace
+            continue;
+        }
         stringstream ss(line);
         string name, id, email;
         getline(ss, name, ',');
@@ -69,26 +89,33 @@ void output(const string& file_name) {
     }
     file.close();
 
-    while (true) {
+    while (true)
+    {
         string info = stack.pop();
-        if (info != "") {
+        if (info != "")
+        {
             cout << info << endl;
-        } else {
+        }
+        else
+        {
             break;
         }
     }
 }
 
-int main() {
+int main()
+{
     string file_name;
-    while (true) {
+    while (true)
+    {
         cout << "Enter the input file name: ";
         cin >> file_name;
         output(file_name);
         cout << "Do you want to try again? (y/n): ";
         string ans;
         cin >> ans;
-        if (ans != "y") {
+        if (ans != "y")
+        {
             break;
         }
     }
