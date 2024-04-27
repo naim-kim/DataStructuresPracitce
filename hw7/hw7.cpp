@@ -10,16 +10,17 @@ using namespace std;
 class Node
 {
 public:
-    string info;
+    string info; //data in node
     Node *next;
 
+    //consttuctor
     Node(string info) : info(info), next(nullptr) {}
 };
 
 class Stack
 {
 private:
-    Node *head;
+    Node *head; // head == top of stack
 
 public:
     Stack() : head(nullptr) {}
@@ -54,6 +55,7 @@ public:
         }
     }
 
+    //dellocate memory
     ~Stack()
     {
         while (head)
@@ -65,6 +67,7 @@ public:
     }
 };
 
+//func to read file. process and print
 void output(const string &file_name)
 {
     Stack stack;
@@ -82,9 +85,9 @@ void output(const string &file_name)
 
     while (getline(file, line))
     {
-        // Skip empty lines
-        if (line.empty() || line.find_first_not_of(" \t\n\v\f\r") == string::npos)
-        { // findFirstNonWhitespace
+        // ehile reading each line skip empty lines
+        if (line.empty() || line.find_first_not_of(" \t\n\v\f\r") == string::npos) // findFirstNonWhitespace
+        { 
             continue;
         }
 
@@ -92,7 +95,10 @@ void output(const string &file_name)
         string name, id, email;
 
         if (getline(ss, name, ',') && getline(ss, id, ',') && getline(ss, email, ',')) {
-            cout << name + ", " + id + ", " + email << endl; // print og content
+
+            // print og content
+            cout << name + ", " + id + ", " + email << endl;
+            // push data
             stack.push(id + ", " + name + ", " + email);
 
         } else {
