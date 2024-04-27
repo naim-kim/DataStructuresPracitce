@@ -1,0 +1,9 @@
+Geoffrey, 17, hinton@handong.edu
+
+Yoshua, 12, yoshua@handong.edu
+
+Yann, 13, yann@handong.edu
+
+Cho, 55, cho@handong.edu
+
+Alex, 57, alex@handong.edu
