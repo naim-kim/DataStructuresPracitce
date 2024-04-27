@@ -5,28 +5,28 @@
 
 using namespace std;
 
-class Item {
+class Node {
 public:
-    string data;
-    Item* next;
+    string info;
+    Node* next;
 
-    Item(string data) : data(data), next(nullptr) {}
+    Node(string info) : info(info), next(nullptr) {}
 };
 
 class Stack {
 private:
-    Item* head;
+    Node* head;
 
 public:
     Stack() : head(nullptr) {}
 
-    void push(string data) {
-        Item* newItem = new Item(data);
+    void push(string info) {
+        Node* newNode = new Node(info);
         if (!head) {
-            head = newItem;
+            head = newNode;
         } else {
-            newItem->next = head;
-            head = newItem;
+            newNode->next = head;
+            head = newNode;
         }
     }
 
@@ -34,17 +34,17 @@ public:
         if (!head) {
             return "";
         } else {
-            Item* temp = head;
-            string data = temp->data;
+            Node* temp = head;
+            string info = temp->info;
             head = head->next;
             delete temp;
-            return data;
+            return info;
         }
     }
 
     ~Stack() {
         while (head) {
-            Item* temp = head;
+            Node* temp = head;
             head = head->next;
             delete temp;
         }
@@ -55,7 +55,7 @@ void output(const string& file_name) {
     Stack stack;
     ifstream file(file_name);
     if (!file.is_open()) {
-        cerr << "Error opening" << file_name << endl;
+        cerr << "Error opening " << file_name << endl;
         return;
     }
     string line;
@@ -70,9 +70,9 @@ void output(const string& file_name) {
     file.close();
 
     while (true) {
-        string data = stack.pop();
-        if (data != "") {
-            cout << data << endl;
+        string info = stack.pop();
+        if (info != "") {
+            cout << info << endl;
         } else {
             break;
         }
@@ -81,8 +81,16 @@ void output(const string& file_name) {
 
 int main() {
     string file_name;
-    cout << "Enter the input file name: ";
-    cin >> file_name;
-    output(file_name);
+    while (true) {
+        cout << "Enter the input file name: ";
+        cin >> file_name;
+        output(file_name);
+        cout << "Do you want to try again? (y/n): ";
+        string ans;
+        cin >> ans;
+        if (ans != "y") {
+            break;
+        }
+    }
     return 0;
 }
