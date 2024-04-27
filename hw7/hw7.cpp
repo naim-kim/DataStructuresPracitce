@@ -67,11 +67,13 @@ void output(const string &file_name)
 {
     Stack stack;
     ifstream file(file_name);
+
     if (!file.is_open())
     {
         cerr << "Error opening " << file_name << endl;
         return;
     }
+
     string line;
     while (getline(file, line))
     {
@@ -82,12 +84,20 @@ void output(const string &file_name)
         }
         stringstream ss(line);
         string name, id, email;
+
         getline(ss, name, ',');
         getline(ss, id, ',');
         getline(ss, email, ',');
+
+        cout << name + ", " + id + ", " + email << endl; // print og content
+
         stack.push(id + ", " + name + ", " + email);
     }
+
     file.close();
+
+    cout << "\noutput: (the lines are in the reverse order"
+         << "\n       and each line has a different order from the input line)" << endl;
 
     while (true)
     {
