@@ -1,3 +1,5 @@
+//DataStructures-02 22000056 Naim Kim
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -75,6 +77,9 @@ void output(const string &file_name)
     }
 
     string line;
+
+    cout << endl << "Input file data: (data format should be 'name, id, email')\n" << endl;
+
     while (getline(file, line))
     {
         // Skip empty lines
@@ -82,22 +87,24 @@ void output(const string &file_name)
         { // findFirstNonWhitespace
             continue;
         }
+
         stringstream ss(line);
         string name, id, email;
 
-        getline(ss, name, ',');
-        getline(ss, id, ',');
-        getline(ss, email, ',');
+        if (getline(ss, name, ',') && getline(ss, id, ',') && getline(ss, email, ',')) {
+            cout << name + ", " + id + ", " + email << endl; // print og content
+            stack.push(id + ", " + name + ", " + email);
 
-        cout << name + ", " + id + ", " + email << endl; // print og content
-
-        stack.push(id + ", " + name + ", " + email);
+        } else {
+            cout << "file [ " << file_name << " ]'s format is wrong.\n" << endl;
+            return; // Exit the func when format is wrong
+        }
     }
 
     file.close();
 
-    cout << "\noutput: (the lines are in the reverse order"
-         << "\n       and each line has a different order from the input line)" << endl;
+    cout << "\nOutput data: (the lines are in the reverse order"
+         << "\n              and each line has a different order from the input line)\n" << endl;
 
     while (true)
     {
@@ -111,6 +118,7 @@ void output(const string &file_name)
             break;
         }
     }
+    cout << endl;
 }
 
 int main()
@@ -124,8 +132,9 @@ int main()
         cout << "Do you want to try again? (y/n): ";
         string ans;
         cin >> ans;
-        if (ans != "y")
+        if (ans == "n")
         {
+            cout << "See you next time! :)" << endl;
             break;
         }
     }
