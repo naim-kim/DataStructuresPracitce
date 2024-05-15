@@ -93,7 +93,7 @@ void reviseText(const string& textFile, const string& mapFile) {
     // Read map file and build BST
     ifstream mapFileStream(mapFile);
     if (!mapFileStream.is_open()) {
-        cout << "Unable to open map file." << endl;
+        cout << "Can't open map file :(" << endl;
         return;
     }
 
@@ -102,7 +102,7 @@ void reviseText(const string& textFile, const string& mapFile) {
         istringstream iss(line);
         string source, target;
         if (getline(iss, source, ':') && getline(iss, target)) {
-            // Add mappings to the BST
+            // Add mappings
             bst.add(source, target);
         }
     }
@@ -111,7 +111,7 @@ void reviseText(const string& textFile, const string& mapFile) {
     // Read and revise text file
     ifstream textFileStream(textFile);
     if (!textFileStream.is_open()) {
-        cout << "Unable to open text file." << endl;
+        cout << "Can't open text file :(" << endl;
         return;
     }
 
@@ -122,13 +122,13 @@ void reviseText(const string& textFile, const string& mapFile) {
         bool firstWord = true;
 
         while (iss >> word) {
-            // Check if the word is in the BST
+            // Check if it's inn the BST
             string replacement = bst.search(word);
             if (!replacement.empty()) {
                 word = replacement;
             }
 
-            // Append the revised word to the revised line
+            // revised word -> revised line
             if (firstWord) {
                 revisedLine += word;
                 firstWord = false;
@@ -137,23 +137,21 @@ void reviseText(const string& textFile, const string& mapFile) {
             }
         }
 
-        // Output the revised line
         cout << revisedLine << endl;
     }
     textFileStream.close();
 }
 
-// Main function
+// Main func
 int main() {
     string textFile, mapFile;
 
-    // Get input file names from the user
-    cout << "Enter the text file name: ";
+    cout << "Text file name: ";
     getline(cin, textFile);
-    cout << "Enter the map file name: ";
+    cout << "Map file name: ";
     getline(cin, mapFile);
 
-    // Revise the text based on the map and print the revised text
+    // print the revised text
     reviseText(textFile, mapFile);
 
     return 0;
