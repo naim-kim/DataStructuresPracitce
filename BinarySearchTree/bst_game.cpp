@@ -168,6 +168,7 @@ public:
         }
     }
 
+
     // Public function to calculate the height of the tree
     int height() {
         return heightRecursive(root);
@@ -177,12 +178,9 @@ public:
     void display() {
         displayRecursive(root);
     }
-};
 
-// Function to run the Binary Search Tree program
-void run_bst() {
-    BinarySearchTree bst;
-    cout << "Welcome to the Binary Search Tree program!" << endl;
+    void printCommands() {
+        
     cout << "Commands:" << endl;
     cout << "  a key value : Add a node with key and value" << endl;
     cout << "  d key       : Delete the node with key" << endl;
@@ -190,8 +188,19 @@ void run_bst() {
     cout << "  f value     : Find a node by its value" << endl;
     cout << "  h           : Print the height of the tree" << endl;
     cout << "  s           : Display the structure of the tree" << endl;
+    cout << "  c           : Print this list of commands!! (Remember this one :) ! )" << endl;
     cout << "  q           : Quit the program" << endl;
     cout << "Enter your commands:\n";
+    }
+
+};
+
+// Function to run the Binary Search Tree program
+void run_bst() {
+    BinarySearchTree bst;
+
+    cout << "Welcome to the Binary Search Tree program!" << endl;
+    printCommands();
 
     while (true) {
         char command;
@@ -233,6 +242,8 @@ void run_bst() {
             cout << "Height of the tree: " << bst.height() << endl;
         } else if (command == 's') {
             bst.display();
+        } else if (command == 'c') {
+            printCommands();
         }
     }
 }
