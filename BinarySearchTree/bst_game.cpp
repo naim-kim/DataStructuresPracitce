@@ -178,8 +178,9 @@ public:
     void display() {
         displayRecursive(root);
     }
+};
 
-    void printCommands() {
+void printCommands() {
         
     cout << "Commands:" << endl;
     cout << "  a key value : Add a node with key and value" << endl;
@@ -192,8 +193,6 @@ public:
     cout << "  q           : Quit the program" << endl;
     cout << "Enter your commands:\n";
     }
-
-};
 
 // Function to run the Binary Search Tree program
 void run_bst() {
@@ -213,7 +212,7 @@ void run_bst() {
 
         iss >> command;
 
-        if (command != 'a' && command != 'd' && command != 'p' && command != 'f' && command != 'h' && command != 's' && command != 'q') {
+        if (command != 'a' && command != 'd' && command != 'p' && command != 'f' && command != 'h' && command != 's' && command != 'q' && command != 'c') {
             cout << "Invalid command.." << endl;
             continue;
         }
