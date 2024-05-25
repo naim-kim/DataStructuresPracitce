@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <sstream>
 
 class Time {
 public:
@@ -37,6 +38,12 @@ private:
     }
 };
 
+std::string padToSixDigits(const std::string& input) {
+    std::stringstream ss;
+    ss << std::setfill('0') << std::setw(6) << input;
+    return ss.str();
+}
+
 int main() {
     Time time(0, 0, 0);
     std::string input;
@@ -51,13 +58,11 @@ int main() {
         }
 
         try {
+            input = padToSixDigits(input);
             int hhmmss = std::stoi(input);
-            if (input.length() != 6) {
-                throw std::invalid_argument("Invalid length");
-            }
             time.addTime(hhmmss);
         } catch (std::invalid_argument& e) {
-            std::cerr << "Invalid input. Please enter a 6-digit number in hhmmss format or 'q' to quit." << std::endl;
+            std::cerr << "Invalid input. Please enter a number in hhmmss format or 'q' to quit." << std::endl;
             continue;
         }
 
