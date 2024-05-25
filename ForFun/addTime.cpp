@@ -11,7 +11,7 @@ public:
 
     Time(int h = 0, int m = 0, int s = 0) : hours(h), minutes(m), seconds(s) {}
 
-    void addTime(int hhmmss) {
+    void addTime(int hhmmss) { // made format 'hhmmss' to not add the ':' between the numbers in the string (hh:mm:ss)
         int hh = hhmmss / 10000;
         int mm = (hhmmss % 10000) / 100;
         int ss = hhmmss % 100;
@@ -19,7 +19,7 @@ public:
         hours += hh;
         minutes += mm;
         seconds += ss;
-        normalize();
+        convertTime();
     }
 
     void display() const {
@@ -29,7 +29,7 @@ public:
     }
 
 private:
-    void normalize() {
+    void convertTime() {
         minutes += seconds / 60;
         seconds = seconds % 60;
 
@@ -38,7 +38,7 @@ private:
     }
 };
 
-std::string padToSixDigits(const std::string& input) {
+std::string formatToSixDigits(const std::string& input) {
     std::stringstream ss;
     ss << std::setfill('0') << std::setw(6) << input;
     return ss.str();
@@ -48,29 +48,29 @@ int main() {
     Time time(0, 0, 0);
     std::string input;
 
-    std::cout << "Enter times in hhmmss format (type 'q' to quit):" << std::endl;
+    std::cout << "You Don't have to write in all the format for example\n just write 3000 instead of 003000" << std::endl;
+
     while (true) {
-        std::cout << "Enter time in hhmmss: ";
+        std::cout << "Enter times in hhmmss format (type 'q' to quit): ";
         std::getline(std::cin, input);
 
         if (input == "q" || input == "Q") {
             break;
         }
-
         try {
-            input = padToSixDigits(input);
+            input = formatToSixDigits(input);
             int hhmmss = std::stoi(input);
             time.addTime(hhmmss);
         } catch (std::invalid_argument& e) {
-            std::cerr << "Invalid input. Please enter a number in hhmmss format or 'q' to quit." << std::endl;
+            std::cerr << "Invalid input. Please enter a number in hhmmss format or 'q' to quit: " << std::endl;
             continue;
         }
 
-        std::cout << "Current total time: ";
+        std::cout << "Total time: "; // current time
         time.display();
     }
 
-    std::cout << "Final total time: ";
+    std::cout << "Total time: "; // final time
     time.display();
 
     return 0;
