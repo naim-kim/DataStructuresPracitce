@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <string>
 
 class Time {
 public:
@@ -11,17 +12,6 @@ public:
 
     void addSeconds(int sec) {
         seconds += sec;
-        normalize();
-    }
-
-    void addMinutes(int min) {
-        minutes += min;
-        normalize();
-    }
-
-    void addTime(int sec, int min) {
-        addSeconds(sec);
-        addMinutes(min);
         normalize();
     }
 
@@ -43,14 +33,30 @@ private:
 
 int main() {
     Time time(0, 0, 0);
+    std::string input;
 
-    int sec1 = 10000;
-    int sec2 = 3201;
+    std::cout << "Enter times in seconds (type 'q' to quit):" << std::endl;
+    while (true) {
+        std::cout << "Enter time in seconds: ";
+        std::getline(std::cin, input);
 
-    time.addTime(sec1, 0);
-    time.addTime(0, sec2);
+        if (input == "q" || input == "Q") {
+            break;
+        }
 
-    std::cout << "Total time after addition: ";
+        try {
+            int seconds = std::stoi(input);
+            time.addSeconds(seconds);
+        } catch (std::invalid_argument& e) {
+            std::cerr << "Invalid input. Please enter a number or 'q' to quit." << std::endl;
+            continue;
+        }
+
+        std::cout << "Current total time: ";
+        time.display();
+    }
+
+    std::cout << "Final total time: ";
     time.display();
 
     return 0;
