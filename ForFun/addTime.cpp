@@ -10,8 +10,14 @@ public:
 
     Time(int h = 0, int m = 0, int s = 0) : hours(h), minutes(m), seconds(s) {}
 
-    void addSeconds(int sec) {
-        seconds += sec;
+    void addTime(int hhmmss) {
+        int hh = hhmmss / 10000;
+        int mm = (hhmmss % 10000) / 100;
+        int ss = hhmmss % 100;
+        
+        hours += hh;
+        minutes += mm;
+        seconds += ss;
         normalize();
     }
 
@@ -35,9 +41,9 @@ int main() {
     Time time(0, 0, 0);
     std::string input;
 
-    std::cout << "Enter times in seconds (type 'q' to quit):" << std::endl;
+    std::cout << "Enter times in hhmmss format (type 'q' to quit):" << std::endl;
     while (true) {
-        std::cout << "Enter time in seconds: ";
+        std::cout << "Enter time in hhmmss: ";
         std::getline(std::cin, input);
 
         if (input == "q" || input == "Q") {
@@ -45,10 +51,13 @@ int main() {
         }
 
         try {
-            int seconds = std::stoi(input);
-            time.addSeconds(seconds);
+            int hhmmss = std::stoi(input);
+            if (input.length() != 6) {
+                throw std::invalid_argument("Invalid length");
+            }
+            time.addTime(hhmmss);
         } catch (std::invalid_argument& e) {
-            std::cerr << "Invalid input. Please enter a number or 'q' to quit." << std::endl;
+            std::cerr << "Invalid input. Please enter a 6-digit number in hhmmss format or 'q' to quit." << std::endl;
             continue;
         }
 
