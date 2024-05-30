@@ -18,6 +18,12 @@ struct Contact {
 
 vector<Contact> contacts;
 
+// Function to convert a string to lowercase
+string toLower(const string& str) {
+    string lowerStr = str;
+    transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(), ::tolower);
+    return lowerStr;
+}
 void load(const string& filename) {
     ifstream inputFile(filename);
     if (!inputFile) {
@@ -88,7 +94,7 @@ Contact* searchEmail(const string& email) {
 
 void sortByName() {
     sort(contacts.begin(), contacts.end(), [](const Contact& a, const Contact& b) {
-        return a.name < b.name;
+         return toLower(a.name) < toLower(b.name);
     });
 }
 
@@ -131,7 +137,7 @@ int main() {
         showMenu();
         cout << "Enter your input: ";
         cin >> input;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear the newline character from the buffer
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear buffer
         
         switch (input) {
             case 1: {
@@ -141,7 +147,7 @@ int main() {
                 cout << "3. Go back" << endl;
                 cout << "Enter your input: ";
                 cin >> ifsort;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear the newline character from the buffer
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear buffer
                 if (ifsort == 1) {
                     sortByName();
                     printContacts();
@@ -158,7 +164,7 @@ int main() {
                 cout << "3. Go back" << endl;
                 cout << "Enter your input: ";
                 cin >> ifsearch;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear the newline character from the buffer
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear buffer
                 if (ifsearch == 1) {
                     string name;
                     cout << "Enter name: ";
