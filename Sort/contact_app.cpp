@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <iomanip>
+#include <limits>
 
 using namespace std;
 
@@ -29,7 +30,6 @@ void load(const string& filename) {
     while (getline(inputFile, line)) {
         stringstream ss(line);
         Contact contact;
-        //name; birthday; email; phone_number
         getline(ss, contact.name, ';');
         getline(ss, contact.birthday, ';');
         getline(ss, contact.email, ';');
@@ -46,7 +46,6 @@ void save(const string& filename) {
         return;
     }
 
-    //name; birthday; email; phone_number
     for (const auto& contact : contacts) {
         outputFile << contact.name << ";" 
                    << contact.birthday << ";" 
@@ -61,9 +60,12 @@ void insert(const Contact& contact) {
 }
 
 void deleteContact(const string& name) {
-    contacts.erase(remove_if(contacts.begin(), contacts.end(), 
-                             [&](const Contact& contact) { return contact.name == name; }), 
-                   contacts.end());
+    auto it = remove_if(contacts.begin(), contacts.end(), [&](const Contact& contact) { 
+        return contact.name == name; 
+    });
+    if (it != contacts.end()) {
+        contacts.erase(it, contacts.end());
+    }
 }
 
 Contact* searchName(const string& name) {
@@ -97,6 +99,10 @@ void sortByBirthday() {
 }
 
 void printContacts() {
+    if (contacts.empty()) {
+        cout << "file is empty!" << endl;
+        return;
+    }
     for (const auto& contact : contacts) {
         cout << left << setw(20) << contact.name
              << setw(12) << contact.birthday
@@ -125,6 +131,7 @@ int main() {
         showMenu();
         cout << "Enter your input: ";
         cin >> input;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear the newline character from the buffer
         
         switch (input) {
             case 1: {
@@ -134,6 +141,7 @@ int main() {
                 cout << "3. Go back" << endl;
                 cout << "Enter your input: ";
                 cin >> ifsort;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear the newline character from the buffer
                 if (ifsort == 1) {
                     sortByName();
                     printContacts();
@@ -150,10 +158,10 @@ int main() {
                 cout << "3. Go back" << endl;
                 cout << "Enter your input: ";
                 cin >> ifsearch;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear the newline character from the buffer
                 if (ifsearch == 1) {
                     string name;
                     cout << "Enter name: ";
-                    cin.ignore();
                     getline(cin, name);
                     Contact* contact = searchName(name);
                     if (contact) {
@@ -164,7 +172,6 @@ int main() {
                 } else if (ifsearch == 2) {
                     string email;
                     cout << "Enter email: ";
-                    cin.ignore();
                     getline(cin, email);
                     Contact* contact = searchEmail(email);
                     if (contact) {
@@ -178,7 +185,6 @@ int main() {
             case 3: {
                 Contact contact;
                 cout << "Enter name: ";
-                cin.ignore();
                 getline(cin, contact.name);
                 cout << "Enter birthday: ";
                 getline(cin, contact.birthday);
@@ -192,9 +198,9 @@ int main() {
             case 4: {
                 string name;
                 cout << "Enter name of the contact to delete: ";
-                cin.ignore();
                 getline(cin, name);
                 deleteContact(name);
+                cout << name << "Deleted" << endl;
                 break;
             }
             case 5: {
