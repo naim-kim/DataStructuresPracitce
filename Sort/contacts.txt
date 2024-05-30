@@ -1,0 +1,2 @@
+henry choi; 20190303; hchoi@handong.edu; 010-1234-5678
+Naim Kim;20000328;naim.kkim@example.com;010-1234-1234
