@@ -1,8 +1,8 @@
-//DataStructures-02 22000056 Naim Kim
+// basic_calc.cpp
 
 #include "basic_calc.h"
-#include "stack.h"
 #include <cctype>
+#include <cstdlib>
 
 bool BasicCalculator::isOperator(char ch)
 {
@@ -15,7 +15,7 @@ int BasicCalculator::precedence(char op)
         return 1;
     if (op == '*' || op == '/')
         return 2;
-    return 0; //  () >>>>
+    return 0;
 }
 
 float BasicCalculator::calculate(float operand1, float operand2, char op)
@@ -43,8 +43,8 @@ float BasicCalculator::calculate(float operand1, float operand2, char op)
 
 float BasicCalculator::evaluate()
 {
-    Stack<float> operandStack;
-    Stack<char> operatorStack;
+    std::stack<float> operandStack;
+    std::stack<char> operatorStack;
 
     for (size_t i = 0; i < arithmetic_expr.length(); ++i)
     {
@@ -66,35 +66,45 @@ float BasicCalculator::evaluate()
         }
         else if (ch == ')')
         {
-            while (!operatorStack.isEmpty() && operatorStack.read_top() != '(')
+            while (!operatorStack.empty() && operatorStack.top() != '(')
             {
-                char op = operatorStack.pop();
-                float operand2 = operandStack.pop();
-                float operand1 = operandStack.pop();
+                char op = operatorStack.top();
+                operatorStack.pop();
+                float operand2 = operandStack.top();
+                operandStack.pop();
+                float operand1 = operandStack.top();
+                operandStack.pop();
                 operandStack.push(calculate(operand1, operand2, op));
             }
-            operatorStack.pop(); // Pop '('
+            if (!operatorStack.empty() && operatorStack.top() == '(')
+                operatorStack.pop();
         }
         else if (isOperator(ch))
         {
-            while (!operatorStack.isEmpty() && precedence(ch) <= precedence(operatorStack.read_top()))
+            while (!operatorStack.empty() && precedence(operatorStack.top()) >= precedence(ch))
             {
-                char op = operatorStack.pop();
-                float operand2 = operandStack.pop();
-                float operand1 = operandStack.pop();
+                char op = operatorStack.top();
+                operatorStack.pop();
+                float operand2 = operandStack.top();
+                operandStack.pop();
+                float operand1 = operandStack.top();
+                operandStack.pop();
                 operandStack.push(calculate(operand1, operand2, op));
             }
             operatorStack.push(ch);
         }
     }
 
-    while (!operatorStack.isEmpty())
+    while (!operatorStack.empty())
     {
-        char op = operatorStack.pop();
-        float operand2 = operandStack.pop();
-        float operand1 = operandStack.pop();
+        char op = operatorStack.top();
+        operatorStack.pop();
+        float operand2 = operandStack.top();
+        operandStack.pop();
+        float operand1 = operandStack.top();
+        operandStack.pop();
         operandStack.push(calculate(operand1, operand2, op));
     }
 
-    return operandStack.pop();
+    return operandStack.top();
 }
