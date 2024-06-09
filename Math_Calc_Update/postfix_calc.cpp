@@ -1,53 +1,29 @@
-//DataStructures-02 22000056 Naim Kim
+// postfix_calc.cpp
 
-#include <iostream>
-#include <cstdlib>
-#include <cstring>
-#include <cctype>
 #include "postfix_calc.h"
-#include "stack.h"
+#include <sstream> // for std::istringstream
 
 float Calculator::evaluate()
 {
-    Stack<float> stack;
-    char *token;
-    float val = 0;
+    std::stack<float> stack;
+    std::istringstream iss(postfix);
+    std::string token;
+    float val;
 
-    // Convert the postfix string to a C-style string
-    char *postfix_cstr = const_cast<char *>(postfix.c_str());
-
-    // Tokenizer
-    token = strtok(postfix_cstr, " ");
-    while (token)
+    while (iss >> token)
     {
-        if (isdigit(*token) || (strlen(token) > 1 && *token == '-' && isdigit(token[1])))
+        if (isdigit(token[0]))
         {
-            stack.push(atof(token));
+            stack.push(std::stof(token));
         }
         else
         {
-            float operand2, operand1;
-            if (!stack.isEmpty())
-            {
-                operand2 = stack.pop();
-            }
-            else
-            {
-                std::cout << "Error: Not enough operands for operator." << std::endl;
-                return 0;
-            }
+            float operand2 = stack.top();
+            stack.pop();
+            float operand1 = stack.top();
+            stack.pop();
 
-            if (!stack.isEmpty())
-            {
-                operand1 = stack.pop();
-            }
-            else
-            {
-                std::cout << "Error: Not enough operands for operator." << std::endl;
-                return 0;
-            }
-
-            switch (*token)
+            switch (token[0])
             {
             case '+':
                 stack.push(operand1 + operand2);
@@ -61,34 +37,32 @@ float Calculator::evaluate()
             case '/':
                 if (operand2 == 0)
                 {
-                    std::cout << "Error: Division by zero encountered!" << std::endl;
+                    std::cerr << "Error: Division by zero encountered!" << std::endl;
                     return 0;
                 }
                 stack.push(operand1 / operand2);
                 break;
             default:
-                std::cout << "Invalid operator encountered!" << std::endl;
+                std::cerr << "Invalid operator encountered!" << std::endl;
                 return 0;
             }
         }
-        // get next token
-        token = strtok(NULL, " ");
     }
 
-    // get the result from stack
-    if (!stack.isEmpty())
+    if (!stack.empty())
     {
-        val = stack.pop();
+        val = stack.top();
+        stack.pop();
     }
     else
     {
-        std::cout << "Error: No result calculated." << std::endl;
+        std::cerr << "Error: No result calculated." << std::endl;
         return 0;
     }
 
-    if (!stack.isEmpty())
+    if (!stack.empty())
     {
-        std::cout << "Error: Multiple values left on stack." << std::endl;
+        std::cerr << "Error: Multiple values left on stack." << std::endl;
         return 0;
     }
     return val;

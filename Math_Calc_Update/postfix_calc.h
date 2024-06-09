@@ -1,11 +1,11 @@
-//DataStructures-02 22000056 Naim Kim
+// postfix_calc.h
 
 #ifndef __POSTFIX_CALC_H__
 #define __POSTFIX_CALC_H__
 
 #include <iostream>
-#include <ctype.h>
-#include <stdlib.h>
+#include <string>
+#include <stack>
 
 class Calculator
 {
