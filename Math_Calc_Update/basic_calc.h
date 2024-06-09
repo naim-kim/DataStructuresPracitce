@@ -1,10 +1,11 @@
-//DataStructures-02 22000056 Naim Kim
+// basic_calc.h
 
-#ifndef BASIC_CALC_H
-#define BASIC_CALC_H
+#ifndef __BASIC_CALC_H__
+#define __BASIC_CALC_H__
 
 #include <iostream>
 #include <string>
+#include <stack>
 
 class BasicCalculator
 {
