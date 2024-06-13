@@ -5,19 +5,30 @@
 
 int main()
 {
-    std::string infix_expr, postfix_expr;
+    std::string expr;
+    char choice;
 
-    std::cout << "Enter an infix expression: ";
-    std::getline(std::cin, infix_expr);
+    std::cout << "Choose the type of expression to evaluate (i for infix, p for postfix): ";
+    std::cin >> choice;
+    std::cin.ignore(); // To ignore the newline character after the choice
 
-    BasicCalculator basicCalc(infix_expr);
-    std::cout << "Infix evaluation: " << basicCalc.evaluate() << std::endl;
+    if (choice == 'i' || choice == 'I') {
+        std::cout << "Enter an infix expression: ";
+        std::getline(std::cin, expr);
 
-    std::cout << "Enter a postfix expression: ";
-    std::getline(std::cin, postfix_expr);
+        BasicCalculator basicCalc(expr);
+        std::cout << "Infix evaluation: " << basicCalc.evaluate() << std::endl;
+    } 
+    else if (choice == 'p' || choice == 'P') {
+        std::cout << "Enter a postfix expression: ";
+        std::getline(std::cin, expr);
 
-    Calculator postfixCalc(postfix_expr);
-    std::cout << "Postfix evaluation: " << postfixCalc.evaluate() << std::endl;
+        Calculator postfixCalc(expr);
+        std::cout << "Postfix evaluation: " << postfixCalc.evaluate() << std::endl;
+    } 
+    else {
+        std::cout << "Invalid choice! Please run the program again and choose either 'i' for infix or 'p' for postfix." << std::endl;
+    }
 
     return 0;
 }
