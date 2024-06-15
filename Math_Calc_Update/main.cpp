@@ -3,32 +3,41 @@
 #include <iostream>
 #include <string>
 
-int main()
-{
-    std::string expr;
-    char choice;
+int main() {
+    while (true) {
+        std::string choice;
+        std::cout << "\nChoose the type of expression to evaluate \n(1: Infix, 2: Postfix, 3: Exit): ";
+        std::getline(std::cin, choice);
 
-    std::cout << "Choose the type of expression to evaluate (i for infix, p for postfix): ";
-    std::cin >> choice;
-    std::cin.ignore(); // To ignore the newline character after the choice
+        if (choice == "3") {
+            break;
+        }
 
-    if (choice == 'i' || choice == 'I') {
-        std::cout << "Enter an infix expression: ";
-        std::getline(std::cin, expr);
-
-        BasicCalculator basicCalc(expr);
-        std::cout << "Infix evaluation: " << basicCalc.evaluate() << std::endl;
-    } 
-    else if (choice == 'p' || choice == 'P') {
-        std::cout << "Enter a postfix expression: ";
-        std::getline(std::cin, expr);
-
-        Calculator postfixCalc(expr);
-        std::cout << "Postfix evaluation: " << postfixCalc.evaluate() << std::endl;
-    } 
-    else {
-        std::cout << "Invalid choice! Please run the program again and choose either 'i' for infix or 'p' for postfix." << std::endl;
+        if (choice == "1") {
+            std::string infix_expr;
+            std::cout << "\nEnter an infix expression: ";
+            std::getline(std::cin, infix_expr);
+            BasicCalculator infixCalc(infix_expr);
+            try {
+                std::cout << "> " << infix_expr << " = " << infixCalc.evaluate() << std::endl;
+            } catch (const std::exception& e) {
+                std::cerr << "Error: " << e.what() << std::endl;
+            }
+        } else if (choice == "2") {
+            std::string postfix_expr;
+            std::cout << "\nEnter a postfix expression: ";
+            std::getline(std::cin, postfix_expr);
+            Calculator postfixCalc(postfix_expr);
+            try {
+                std::cout << "> " << postfix_expr << " = " << postfixCalc.evaluate() << std::endl;
+            } catch (const std::exception& e) {
+                std::cerr << "Error: " << e.what() << std::endl;
+            }
+        } else {
+            std::cerr << "\n> Invalid choice. Please enter 1, 2, or 0." << std::endl;
+        }
     }
 
+    std::cout << "\n> Exiting the program. Bye!\n" << std::endl;
     return 0;
 }
