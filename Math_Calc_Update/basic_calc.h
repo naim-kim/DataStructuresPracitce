@@ -1,11 +1,7 @@
-// basic_calc.h
-
 #ifndef __BASIC_CALC_H__
 #define __BASIC_CALC_H__
 
-#include <iostream>
 #include <string>
-#include <stack>
 
 class BasicCalculator
 {
