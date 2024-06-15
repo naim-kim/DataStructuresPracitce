@@ -19,7 +19,7 @@ g++ -o calc main.cpp basic_calc.cpp postfix_calc.cpp
 =2
 
 5 7 + 62 - *
-=48
+= Error : insufficient operands for the last operator.
 
 4 2 3 5 1 - + * +
 =18
