@@ -4,6 +4,9 @@
 #include <cctype>
 #include <cstdlib>
 
+#include <stack>
+#include <iostream>
+
 bool BasicCalculator::isOperator(char ch)
 {
     return (ch == '+' || ch == '-' || ch == '*' || ch == '/');
