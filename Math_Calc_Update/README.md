@@ -1,6 +1,6 @@
 # How to run:
 ```
-g++ -o calc main.cpp basic_calc.cpp postfix_calc.cpp
+g++ -o calc main.cpp infix_calc.cpp postfix_calc.cpp
 ./calc
 ```
 

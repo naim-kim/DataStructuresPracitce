@@ -1,6 +1,4 @@
-// basic_calc.cpp
-
-#include "basic_calc.h"
+#include "infix_calc.h"
 #include <cctype>
 #include <cstdlib>
 

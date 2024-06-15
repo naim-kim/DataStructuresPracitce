@@ -1,5 +1,3 @@
-// postfix_calc.h
-
 #ifndef __POSTFIX_CALC_H__
 #define __POSTFIX_CALC_H__
 
