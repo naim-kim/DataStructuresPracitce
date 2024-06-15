@@ -12,8 +12,14 @@ float Calculator::evaluate() {
         if (isdigit(token[0]) || (token[0] == '-' && isdigit(token[1]))) {
             stack.push(std::stof(token));
         } else {
+            if (stack.size() < 2) {
+                std::cerr << "Error: Insufficient operands for the operator '" << token << "'" << std::endl;
+                return 0;
+            }
+
             float operand2 = stack.top(); stack.pop();
             float operand1 = stack.top(); stack.pop();
+
             switch (token[0]) {
                 case '+':
                     stack.push(operand1 + operand2);
@@ -32,16 +38,16 @@ float Calculator::evaluate() {
                     stack.push(operand1 / operand2);
                     break;
                 default:
-                    std::cerr << "Invalid operator encountered!" << std::endl;
+                    std::cerr << "Invalid operator encountered: " << token << std::endl;
                     return 0;
             }
         }
     }
 
-    if (!stack.empty()) {
-        return stack.top();
-    } else {
-        std::cerr << "Error: No result calculated." << std::endl;
+    if (stack.size() != 1) {
+        std::cerr << "Error: The postfix expression is invalid. Stack size is not 1 after evaluation." << std::endl;
         return 0;
     }
+
+    return stack.top();
 }
