@@ -6,9 +6,9 @@
 using namespace std;
 
 typedef struct {
-  int year;
-  int month;
-  int day;
+    int year;
+    int month;
+    int day;
 } Date;
 
 // 'expression must be a modifiable lvalue' error fix
